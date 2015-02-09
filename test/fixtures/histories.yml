@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  bill_id: 1
+  amountpaid: 1
+  supposetopay: 1
+
+two:
+  user_id: 1
+  bill_id: 1
+  amountpaid: 1
+  supposetopay: 1

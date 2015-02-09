@@ -1,0 +1,17 @@
+<% provide(:topright,"Hi") %>
+<% provide(:title,"Requests") %>
+
+
+<br>
+<%= form_tag(bill_request_bills_path, method: "get") do %>
+  Amount : 
+  <%= number_field_tag :q %>
+  <%= hidden_field_tag :id,@settlepayee %>
+ <%= submit_tag 'Settle'%>
+ <% end %>
+<br>
+
+
+
+
+<%= link_to 'Dashboard', bills_path %>

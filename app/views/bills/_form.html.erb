@@ -1,0 +1,52 @@
+<h1><%= @msg %></h1>
+<br/>
+<br/>
+<%= form_for(@bill) do |f| %>
+  <% if @bill.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bill.errors.count, "error") %> prohibited this bill from being saved:</h2>
+
+      <ul>
+      <% @bill.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= f.hidden_field :c_id , :value => current_user.id %> 
+  <!-- <div class="field">
+    <%= f.label :c_id %><br />
+    <%= f.number_field :c_id %>
+  </div> -->
+  <div class="field">
+    <%= f.label :date %><br />
+    <%= f.date_select :date %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+
+  </div>
+  <div class="field" >
+    <%= f.label :amount %><br />
+    <%= f.number_field :amount %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :bill_type %><br />
+    <%= f.check_box :bill_type, :value => 1 %> Custom
+  </div>
+  <%= f.label :Select_Friends %><br>
+
+<pre><% @users.each do |f| %>
+   <input type="checkbox" name="friends[<%=f.id%>][checked]" value="true" > <%= f.email %>
+   <%= "Amount he/she paid :" %><input name="friends[<%=f.id%>][amount]" class="field" type="number">             <label class="amount_field" style="display:none"><%= "Amount Suppose to  :" %></label><input name="friends[<%=f.id%>][Supposeamt]" style="display:none" class="amount_field" type = "number">
+   <% end %></pre>
+
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

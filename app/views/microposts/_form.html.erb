@@ -1,0 +1,57 @@
+<%= form_for(@micropost) do |f| %>
+  <% if @micropost.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@micropost.errors.count, "error") %> prohibited this micropost from being saved:</h2>
+
+      <ul>
+      <% @micropost.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+  <div class="field">
+    <%= f.label :Description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :Total_money %><br />
+    <%= f.number_field :t_money %>
+  </div>
+  <!-- 
+  <div class="field">
+    <%= f.label :s_money %><br />
+    <%= f.number_field :s_money %>
+  </div> -->
+ <!--  <div class="field">
+    <%= f.label :user2 %><br />
+    <%= f.number_field :user2 %>
+  </div> -->
+
+
+<%= f.label :Select_Friends %><br>
+
+<% @users.each do |f| %>
+   <input type="checkbox" name="checkbox" value="Email"> <%= f.email %> <br>
+   <br>  
+<% end %>
+
+
+
+
+  <div class="field">
+    <%= f.label :date %><br />
+    <%= f.datetime_select :date %>
+  </div>
+  
+ 
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  
+ 
+
+<% end %>

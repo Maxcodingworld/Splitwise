@@ -1,0 +1,66 @@
+<% provide(:topright,"Hi") %>
+<% provide(:title,"Transactions Details") %>
+
+<p id="notice"><%= notice %></p>
+
+
+
+
+
+
+
+<% @micropayer.each do |obj| %>
+  <% bill = obj.bill %>
+     <h4><strong><%= "Description : #{bill.description}" %><br>
+     <%= "Date : #{bill.date.strftime("%m/%d/%Y")}" %><br>
+     <%= "Total Amount : #{bill.amount}" %><br>
+     <%= "Bill_created_by : #{bill.user.email}" %><br>
+     <%= "Transfer Between You and #{@userview.email } : #{obj.amount} " %> 
+
+<strong></h4>
+           <br>
+           <br>
+           <p>People Associated with this Bill:</p>
+           <br>
+
+<pre><table>
+           <th><%= "User :" %></th>
+           <th>                <%= "Amount he/she paid :" %></th>
+           <th>              <%= "Amount he/she supposed to :" %></th>
+           <th>              <%= "Individual Balance: " %></th>
+</table></pre>           
+       
+
+
+
+       <pre><% bill.histories.each do |hisobj| %>
+           <table border:2px>
+           <td><%= "#{hisobj.user.email}" %></td>
+           <td>                    <%= "#{hisobj.amountpaid}" %></td>
+           <td>              <%= "#{hisobj.supposetopay}" %></td>
+        
+           <% if  hisobj.amountpaid.to_i - hisobj.supposetopay.to_i > 0 %>
+             <td>                                       <%= " Gets #{hisobj.amountpaid.to_i - hisobj.supposetopay.to_i} Rupees " %>
+             <% elsif hisobj.amountpaid.to_i - hisobj.supposetopay.to_i < 0 %>
+               <td>                                     <%= " pay #{hisobj.supposetopay.to_i - hisobj.amountpaid.to_i} Rupees " %>
+              <% else %>
+               <td>                                     <%= "Clear" %></td> 	
+              <% end %>
+
+           </table>
+        <% end %></pre>
+     	<br>
+     	<br> 
+<% end %>     
+
+
+
+<pre><h1>Settlement History</h1>
+<% @settledata.each do |obj| %>  
+  <% if obj.payee == @curr11.to_i and obj.payer == @usershow.to_i and obj.status == 1 %>
+     <%= "#{@userview.email} settled  ||Amount : #{obj.amount}||  with You on #{obj.updated_at.strftime("%d/%m/%y")}" %><br>
+  <% elsif obj.payer == @curr11.to_i and obj.payee == @usershow.to_i and obj.status == 1  %>
+     <%= "You settled  ||Amount : #{obj.amount}||  with #{@userview.email} on #{obj.updated_at.strftime("%d/%m/%y")}" %><br>
+ <% end %>
+<% end %></pre>
+<%= link_to 'Dashboard', bills_path %>

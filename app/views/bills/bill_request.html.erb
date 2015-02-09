@@ -1,0 +1,43 @@
+<% provide(:topright,"Hi") %>
+<% provide(:title,"Request Status") %>
+
+
+<h1>Your Requests</h1>
+
+<pre><% Settle.where("payer = #{@curr}").each do |obj| %>
+  <%= "To give #{obj.amount} to #{User.find("#{obj.payee}").email}" %>
+   <% if obj.status == 0 %>
+   <%= "Status : Pending ..."%>
+   <% elsif obj.status == 1 %>
+   <%= "Status : Accepted :)"%>
+   <% else %>
+   <%= "Status : Declined :("%>
+   <%end%><br>
+  <% end %></pre>
+
+
+
+<h1>Requests You to approve: </h1>
+
+<pre><% Settle.where("payee = #{@curr}").each do |obj| %>
+  <%= "To take #{obj.amount} from #{User.find("#{obj.payer}").email}" %>
+   
+   <%= form_tag(edit_bill_path(obj), method: "get") do %>
+  
+    <%= select_tag 'status_op', options_for_select(["PENDING","ACCEPTED","DECLINED"]) %>
+  <%= hidden_field_tag :id, obj.id %>
+    <%= submit_tag 'Settle'%>
+  <% end %>
+
+
+   <%end%><br>
+  </pre>
+
+
+
+
+
+
+
+
+<%= link_to 'Dashboard', bills_path %>

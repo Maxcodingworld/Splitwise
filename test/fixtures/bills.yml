@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  c_id: 1
+  date: 2015-01-29 17:47:41
+  description: MyString
+  amount: 1
+
+two:
+  c_id: 1
+  date: 2015-01-29 17:47:41
+  description: MyString
+  amount: 1

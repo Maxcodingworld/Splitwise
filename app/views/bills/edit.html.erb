@@ -1,0 +1,12 @@
+<% provide(:topright,"Hi") %>
+<% provide(:title,"Request Status") %>
+
+
+<%= "Request is #{@status}" %>
+
+<br>
+<br>
+<%= link_to 'Dashboard', bills_path %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<%= link_to 'New Bill', new_bill_path %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<%= link_to "Sign out", destroy_user_session_path %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<%= link_to 'Requests', bill_request_bills_path %>

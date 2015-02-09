@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  description: MyString
+  t_money: 1
+  s_money: 1
+  user2: 1
+  date: 2015-01-29 11:58:22
+
+two:
+  user_id: 1
+  description: MyString
+  t_money: 1
+  s_money: 1
+  user2: 1
+  date: 2015-01-29 11:58:22

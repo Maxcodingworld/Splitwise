@@ -1,0 +1,80 @@
+<% provide(:title,"Listing bills") %>
+<% provide(:topright,"Hi") %>
+
+<pre>
+<table>
+  
+ <% takesum =0%>
+      <% givesum =0%>
+<% sumsettlepayr =0%>
+<% sumsettlepaye =0%>
+  <% @allusersbutcurr.each do |obj| %>
+      <% sum =0 %>
+     
+      <% obj.payer.each do |mp| %>
+        
+        <% if @userid == mp.payee_id%>
+          <% sum = sum + mp.amount %>
+        <% end %>     
+      <% end %>
+    
+      
+      <% sum2 =0 %>
+      <% obj.payee.each do |mp| %>
+        
+        <% if @userid == mp.payer_id%>
+          <% sum2 = sum2 + mp.amount %>
+        <% end %>  
+      <% end %>  
+
+      <% sumsettlepayr =0%>
+<% sumsettlepaye =0%>
+      
+       <% @settledata.each do |setd| %>
+        
+        <% if setd.payee == @userid and setd.payer == obj.id and setd.status == 1 %>
+            <% sumsettlepaye += setd.amount %>
+        <% end %>  
+  <% end %>
+
+  
+       <% @settledata.each do |setd| %>
+        
+        <% if setd.payer == @userid and setd.payee == obj.id and setd.status == 1%>
+            <% sumsettlepayr += setd.amount %>
+        <% end %>  
+  <% end %>
+
+
+      <% if(sum - sum2 - sumsettlepaye + sumsettlepayr > 0 ) %>
+      
+       </tr> 
+            <% takesum += sum - sum2 -sumsettlepaye + sumsettlepayr %>
+            <td>&nbsp;&nbsp;<%= "Take #{sum - sum2 - sumsettlepaye + sumsettlepayr}" %></td>
+            <td>&nbsp;&nbsp;<%= "from #{obj.email} " %></td> 
+            <td>&nbsp;&nbsp;<%= link_to 'Show', bill_path(obj.id) %></td>
+            <td></td> 
+       </tr>
+      <% elsif(sum - sum2 - sumsettlepaye + sumsettlepayr < 0 ) %>
+       </tr> 
+            <% givesum += sum2 - sum -sumsettlepayr + sumsettlepaye%>
+            <td>&nbsp;&nbsp;<%= "Give #{sum2 - sum + sumsettlepaye - sumsettlepayr} " %></td>
+            <td>&nbsp;&nbsp;<%= "to #{obj.email}" %></td> 
+            <td>&nbsp;&nbsp;<%= link_to 'Show' , bill_path(obj.id) %></td>
+            <td>&nbsp;&nbsp;<%= link_to 'Settle', settle_bills_path(id: obj.id) %></td>
+            
+       </tr>
+
+       <% end %>
+
+  <% end %>
+  </table></pre>  
+  <br>
+  <br>
+
+ <pre><h3><%= "Total take : #{takesum }" %>              <%= "Total Give : #{givesum }" %>         <% if takesum - givesum >0 %><%= "Total #{takesum - givesum} Rupees Up" %><% elsif takesum - givesum <0 %><%= "Total #{givesum - takesum} Rupees Down" %><% else %><%= "You are free to go" %><% end %></h3></pre>
+
+<%= link_to 'New Bill', new_bill_path %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<%= link_to "Sign out", destroy_user_session_path %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<%= link_to 'Requests', bill_request_bills_path %>
+

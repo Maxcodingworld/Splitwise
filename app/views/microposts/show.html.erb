@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Details :</b>
+  
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @micropost.description %>
+</p>
+
+<p>
+  <b>Total Expense:</b>
+  <%= @micropost.t_money %>
+</p>
+
+<p>
+  <b>Money owe:</b>
+  <%= @micropost.s_money %>
+</p>
+
+<p>
+  <b>With:</b>
+  <%= @micropost.user2 %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @micropost.date %>
+</p>
+
+
+<%= link_to 'Edit', edit_micropost_path(@micropost) %> |
+<%= link_to 'Back', microposts_path %>
