@@ -1,7 +1,7 @@
 class BillsController < ApplicationController
   before_filter :set_bill, only: [:show, :edit, :update, :destroy]
   layout 'main_layout'
-  respond_to :html
+  respond_to :html,:js,:json
 
   def index
     @bills=Bill.all
@@ -43,9 +43,15 @@ class BillsController < ApplicationController
 
 
   end  
+
+  def filter_bills
+    @curr =current_user.id
+    @filter_type = params[:filter_type].to_i
+  end 
  
   def edit
    @status = params["status_op"]
+   @st_his = params["status_his"]
    @obj=Settle.find(params[:id])
     
    if @status == "PENDING" 

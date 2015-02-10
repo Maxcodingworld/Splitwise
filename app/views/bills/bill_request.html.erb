@@ -3,19 +3,10 @@
 
 
 <h1>Your Requests</h1>
+<%= "Filter : " %>
+<%=select_tag 'status_his', options_for_select([["NONE","3"],["PENDING","0"],["ACCEPTED","1"],["DECLINED","2"]]) %>
 
-<pre><% Settle.where("payer = #{@curr}").each do |obj| %>
-  <%= "To give #{obj.amount} to #{User.find("#{obj.payee}").email}" %>
-   <% if obj.status == 0 %>
-   <%= "Status : Pending ..."%>
-   <% elsif obj.status == 1 %>
-   <%= "Status : Accepted :)"%>
-   <% else %>
-   <%= "Status : Declined :("%>
-   <%end%><br>
-  <% end %></pre>
-
-
+<pre class = 'test'></pre>
 
 <h1>Requests You to approve: </h1>
 

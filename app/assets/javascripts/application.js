@@ -27,3 +27,21 @@ $("#bill_bill_type").live("click", function(event){
 
 });
 
+
+
+$("#status_his").live("change", function(event){
+	$.get('/bills/filter_bills.js?filter_type='+$(this).val(),function(data){
+	});
+	// if($(this).attr("ALL") == "ALL"){
+	// 	return 3;
+	// }
+	// else if($(this).attr("PENDING") == "PENDING"){
+	// 	return 0;
+	// }
+	// else if($(this).attr("ACCEPTED") == "ACCEPTED"){
+	// 	return 1;
+	// } 
+	// else if($(this).attr("DECLINED") == "DECLINED"){
+	// 	return 2;
+	// }
+});

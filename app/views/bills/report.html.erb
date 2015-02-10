@@ -1,0 +1,10 @@
+<% Settle.where("payer = #{curr} and status = #{filter_type}").each do |obj| %>
+  <%= "To give #{obj.amount} to #{User.find("#{obj.payee}").email}" %>
+   <% if obj.status == 0 %>
+   <%= "Status : Pending ..."%>
+   <% elsif obj.status == 1 %>
+   <%= "Status : Accepted :)"%>
+   <% else %>
+   <%= "Status : Declined :("%>
+   <%end%><br>
+ <% end %>
