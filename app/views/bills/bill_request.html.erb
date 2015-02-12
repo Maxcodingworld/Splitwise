@@ -2,11 +2,20 @@
 <% provide(:title,"Request Status") %>
 
 
-<h1>Your Requests</h1>
-<%= "Filter : " %>
+<h1>Your Requests</h1><pre>
+<%= "Filter : " %>      <%= "To date"%>                <%= "Upto"%></pre>         
+<%= form_tag(filter_report_bills_path, method: "get") do %>
 <%=select_tag 'status_his', options_for_select([["NONE","3"],["PENDING","0"],["ACCEPTED","1"],["DECLINED","2"]]) %>
 
-<pre class = 'test'></pre>
+<input style="height:27px" type="date" name="dat">
+<input style="height:27px" type="date" name="dat_to">
+  
+
+  <%= submit_tag 'Submit'%>
+
+  <% end %>
+
+
 
 <h1>Requests You to approve: </h1>
 

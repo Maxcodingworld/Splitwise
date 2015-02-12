@@ -21,6 +21,7 @@ class BillsController < ApplicationController
 
   end
 
+
   def new
     @users = User.select("id,email")
     @bill = Bill.new
@@ -48,10 +49,18 @@ class BillsController < ApplicationController
     @curr =current_user.id
     @filter_type = params[:filter_type].to_i
   end 
+
+  def filter_report
+    @curr =current_user.id
+    @st_his = params["status_his"]
+    @sdate = params["dat"]
+    @upto_date = params["dat_to"]
+    @settles  = Settle.where("payer = ? and status = ? and trunc(updated_at) >=? and trunc(updated_at) <=?", @curr, @st_his, @sdate.to_date, @upto_date.to_date)
+  end
  
   def edit
    @status = params["status_op"]
-   @st_his = params["status_his"]
+   
    @obj=Settle.find(params[:id])
     
    if @status == "PENDING" 

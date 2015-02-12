@@ -4,6 +4,7 @@ Splitwise::Application.routes.draw do
       get 'settle'
       get 'bill_request'
       get 'filter_bills'
+      get 'filter_report'
     end
   end
 

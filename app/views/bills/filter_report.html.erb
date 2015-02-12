@@ -1,11 +1,15 @@
+<% provide(:topright,"Hi") %>
+<% provide(:title,"Request Status") %>
+
+<pre class = 'test'>
 <table>
            <th><%= "Date :" %></th>
            <th>          <%= "Amount  :" %></th>
            <th>          <%= "To whom : " %></th>
            <th>          <%= "Status  : " %></th>
 </table>
-<% Settle.where("payer = #{@curr} and status = #{@filter_type}").each do |obj| %>
 <table>
+<% @settles.each do |obj| %>
 <tr><td><%= "#{obj.updated_at.strftime("%m/%d/%y")}"%></td>
   <td>          <%= "#{obj.amount}"%></td>
   <td>          <%= "#{User.find("#{obj.payee}").email}" %></td>
@@ -16,4 +20,10 @@
    <% else %>
    <td>    <%= "Declined :("%></td></tr>
    <%end%><br>
- <% end %>
+ <%end%></table></pre>
+<br>
+<br>
+<%= link_to 'Dashboard', bills_path %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<%= link_to 'New Bill', new_bill_path %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<%= link_to "Sign out", destroy_user_session_path %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<%= link_to 'Requests', bill_request_bills_path %>
